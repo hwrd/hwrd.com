@@ -23,6 +23,8 @@ configure :development do
   activate :livereload
 end
 
+activate :dotenv
+
 ###
 # Helpers
 ###
@@ -41,4 +43,14 @@ configure :build do
 
   # Minify Javascript on build
   # activate :minify_javascript
+end
+
+activate :deploy do |deploy|
+  deploy.deploy_method   = :sftp
+  deploy.host            = ENV['SFTP_HOST']
+  deploy.port            = 22
+  deploy.path            = '/home/public'
+  # Optional Settings
+  deploy.user     = ENV['SFTP_USER'] # no default
+  deploy.password = ENV['SFTP_PASS'] # no default
 end
